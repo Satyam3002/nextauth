@@ -28,6 +28,16 @@ const userSchema = new mongoose.Schema({
     verifyToken: String,
     verifyTokenExpiry: Date
 })
- const User = mongoose.model("users", userSchema) || mongoose.models.users;
+
+try {
+    // Try to get the existing model
+    mongoose.model('users');
+} catch {
+    // Model doesn't exist, so create it
+    mongoose.model('users', userSchema);
+}
+
+// Now we can safely get the model
+const User = mongoose.models.users;
 
 export default User; 
