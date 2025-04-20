@@ -19,18 +19,18 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
       });
     }
 
-    
     var transport = nodemailer.createTransport({
-      host: "sandbox.smtp.mailtrap.io",
-      port: 2525,
-      auth: {
-        user: "f20d79448cf9a4",
-        pass: "3a3941c99bc423",
-      },
-    });
+        host: process.env.MAIL_HOST,
+        port: Number(process.env.MAIL_PORT),
+        auth: {
+          user: process.env.MAIL_USER,
+          pass: process.env.MAIL_PASS,
+        },
+      });
+      
 
     const mailOptions = {
-      from: "satyamlaheri3@gmail.com",
+      from: process.env.MAIL_USER,
       to: email,
       subject:
         emailType === "VERIFY" ? "Verify your email" : "Reset your password",

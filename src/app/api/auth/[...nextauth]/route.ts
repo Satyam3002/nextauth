@@ -1,30 +1,28 @@
 // src/app/api/auth/[...nextauth]/route.ts
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import { connect} from "@/dbConfig/dbConfig";
+import { connect } from "@/dbConfig/dbConfig";
 import User from "@/models/userModel";
 import bcryptjs from "bcryptjs";
 import { NextAuthOptions } from "next-auth";
 
-export const authOptions: NextAuthOptions = {
+// Define the authOptions but don't export directly
+const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
-    
   ],
   callbacks: {
     async signIn({ user, account, profile }) {
       if (account?.provider === "google") {
         try {
-          
           await connect();
           
           const existingUser = await User.findOne({ email: user.email });
           
           if (!existingUser) {
-            
             const newUser = new User({
               username: profile?.name || user.name, 
               email: user.email,
@@ -71,6 +69,8 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 };
 
+// Create the handler
 const handler = NextAuth(authOptions);
 
+// Export the GET and POST methods
 export { handler as GET, handler as POST };
