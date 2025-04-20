@@ -13,8 +13,8 @@ Ready-to-use Next.js authentication with NextAuth.js, MongoDB, and dual login op
 
 1. **Clone & Install**
 ```bash
-git clone https://github.com/your-username/nextauth-mongodb-auth-starter.git
-cd nextauth-mongodb-auth-starter
+git clone https://github.com/Satyam3002/nextauth
+cd nextauth
 npm install
 ```
 
@@ -36,7 +36,7 @@ npm run dev
 ## 📁 Structure
 - `app/api/auth/[...nextauth]/route.ts` - Auth configuration
 - `lib/dbConfig.ts` - MongoDB connection
-- `models/userModel.ts` - User schema
+- `models/userModel.js` - User schema
 
 ## 📝 License
 MIT © Satyam Laheri
