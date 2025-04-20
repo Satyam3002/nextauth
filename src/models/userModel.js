@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
     },
     password : {
         type: String,
-        required : [true, "Password is required"],
+        required : false
     },
     isVerified: {
         type : Boolean,
@@ -22,6 +22,10 @@ const userSchema = new mongoose.Schema({
     isAdmin : {
         type : Boolean,
         default: false
+    },
+    provider: {
+        type: String,
+        default: "credentials"
     },
     forgotPasswordToken: String,
     forgotPasswordTokenExpiry: Date,
